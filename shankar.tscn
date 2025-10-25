@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://beerbk0f6t8ks"]
+
+[ext_resource type="Script" uid="uid://chxhtgvqmd40d" path="res://shankar.gd" id="1_qhetc"]
+[ext_resource type="Texture2D" uid="uid://d3genysvcio81" path="res://SHANKAR.png" id="2_qhetc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o4l3g"]
+radius = 0.6943
+height = 3.37937
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qhetc"]
+radius = 0.58303
+height = 2.64142
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_qhetc")
+max_health = 10.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.215516, 0)
+shape = SubResource("CapsuleShape3D_o4l3g")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, -0.359219, 0)
+texture = ExtResource("2_qhetc")
+
+[node name="FrontRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.849572, 0)
+target_position = Vector3(0, 0, -1)
+
+[node name="RightRay" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.849572, 0)
+target_position = Vector3(0, 0, -0.75)
+
+[node name="LeftRay" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.849572, 0)
+target_position = Vector3(0, 0, -0.75)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+physics_interpolation_mode = 1
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.199211, 0)
+shape = SubResource("CapsuleShape3D_qhetc")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

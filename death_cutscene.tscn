@@ -1,0 +1,152 @@
+[gd_scene load_steps=9 format=3 uid="uid://dw12puyhdivnv"]
+
+[ext_resource type="Script" uid="uid://c4285fn30gdtr" path="res://deathplayer.gd" id="1_854kr"]
+[ext_resource type="Texture2D" uid="uid://d3genysvcio81" path="res://SHANKAR.png" id="1_ilfnq"]
+[ext_resource type="Texture2D" uid="uid://du3jo0wxkpj17" path="res://Peacock-PNG.webp" id="2_26d4m"]
+[ext_resource type="Texture2D" uid="uid://ccgmdqay84mcj" path="res://house-png-clip-art-best-web-clipart-16.webp" id="3_5c7ri"]
+[ext_resource type="Texture2D" uid="uid://bl7cl6xiswwhc" path="res://Screen Shot 2025-10-18 at 3.24.04 PM.png" id="4_5c7ri"]
+
+[sub_resource type="Animation" id="Animation_26d4m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-488, 102)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D3:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1004, 119)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-118, 113)]
+}
+
+[sub_resource type="Animation" id="Animation_854kr"]
+resource_name = "death"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-488, 102), Vector2(-128, 106)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D3:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.11, 3.13, 3.17, 3.19, 3.24, 3.26, 3.31, 3.33, 3.38, 3.4, 3.46, 3.48, 3.54, 3.56, 3.58, 3.6, 3.66, 3.68, 3.85, 7.46667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.0523599, -0.0523599, 0.0523599, -0.0523599, 0.0523599, -0.0523599, 0.0523599, -0.0523599, 0.0523599, -0.0523599, 0.0523599, -0.0523599, 0.0523599, -0.0523599, 0.0523599, -0.0523599, 0.0523599, -0.0523599, 0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1004, 119), Vector2(-50.0001, 65)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5.5, 7.43333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-118, 113), Vector2(-95, 112), Vector2(-511, 111)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_26xyi"]
+_data = {
+&"RESET": SubResource("Animation_26d4m"),
+&"death": SubResource("Animation_854kr")
+}
+
+[node name="death cutscene" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_26xyi")
+}
+autoplay = "death"
+script = ExtResource("1_854kr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-488, 102)
+scale = Vector2(0.552817, 0.552817)
+texture = ExtResource("1_ilfnq")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+top_level = true
+z_index = -1
+position = Vector2(-1004, 119)
+scale = Vector2(0.7, 0.504)
+texture = ExtResource("2_26d4m")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(-1.81268, -42.75)
+scale = Vector2(0.786047, 0.733748)
+texture = ExtResource("3_5c7ri")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-118, 113)
+scale = Vector2(0.359155, 0.306338)
+texture = ExtResource("4_5c7ri")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_finished"]

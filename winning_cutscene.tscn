@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0t8qcteabnu4"]
+
+[ext_resource type="Shader" uid="uid://ci112bxk0haqe" path="res://winning_cutscene.gdshader" id="1_fl3co"]
+[ext_resource type="Texture2D" uid="uid://d3genysvcio81" path="res://SHANKAR.png" id="1_fr8bx"]
+[ext_resource type="Script" uid="uid://dvo05cv2qxheo" path="res://winplayer.gd" id="1_ri00a"]
+[ext_resource type="Texture2D" uid="uid://63qr5akndrpc" path="res://WhatsApp Image 2025-10-21 at 20.23.28.jpeg" id="3_kofaf"]
+
+[sub_resource type="Animation" id="Animation_34ait"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/time")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_ri00a"]
+resource_name = "win"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/time")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.966667, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8cu63"]
+_data = {
+&"RESET": SubResource("Animation_34ait"),
+&"win": SubResource("Animation_ri00a")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kofaf"]
+shader = ExtResource("1_fl3co")
+shader_parameter/time = 1.0
+shader_parameter/pieces = 20.0
+shader_parameter/intensity = 200.0
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(624, 326)
+scale = Vector2(3.90598, 2.50981)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8cu63")
+}
+autoplay = "win"
+script = ExtResource("1_ri00a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_kofaf")
+scale = Vector2(1.05961, 0.929019)
+texture = ExtResource("1_fr8bx")
+
+[node name="peacockasker" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-1.00002, -0.999996)
+scale = Vector2(0.492719, 0.433542)
+texture = ExtResource("3_kofaf")
+region_enabled = true
+region_rect = Rect2(300, 0, 600, 600)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_finished"]
