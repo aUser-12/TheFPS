@@ -1,155 +1,27 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgt4lp0gu3nip"]
+[gd_scene load_steps=3 format=3 uid="uid://cgt4lp0gu3nip"]
 
 [ext_resource type="Script" uid="uid://mlqykgoyensb" path="res://Player.gd" id="1_xhfnw"]
-[ext_resource type="PackedScene" uid="uid://dhw3k3a5ifu11" path="res://peacock.tscn" id="2_kpjcp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpjcp"]
 radius = 0.38646
 
-[sub_resource type="Animation" id="Animation_vx1uc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("peacock:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1.8271, -0.548135, -2.0041)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("peacock:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(7.48015e-14, 1.5708, 0.368264)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("egg:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1.41159, -0.0836226, -2.53142)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("egg:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_rixu3"]
-resource_name = "shoot"
-length = 0.64
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("peacock:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(1.8271, -0.548135, -2.0041), Vector3(1.8271, -0.548135, -1.79457), Vector3(1.8271, -0.548135, -2.0041)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("peacock:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.11, 0.533333, 0.633333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(7.48015e-14, 1.5708, 0.368264), Vector3(0.294489, 1.5708, 0.368263), Vector3(0.294489, 1.5708, 0.368263), Vector3(7.48015e-14, 1.5708, 0.368264)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("egg:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(1.41159, -0.0836226, -2.53142), Vector3(-3.23651, -0.0836226, -47.9427)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("egg:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_41b6k"]
-_data = {
-&"RESET": SubResource("Animation_vx1uc"),
-&"shoot": SubResource("Animation_rixu3")
-}
-
-[sub_resource type="TorusMesh" id="TorusMesh_kpjcp"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_kpjcp"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kpjcp"]
-
 [node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1.60519, 0, 0, 0, 1.62427, 0, 0, 0)
 collision_layer = 3
 collision_mask = 3
+safe_margin = 0.08
 script = ExtResource("1_xhfnw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_kpjcp")
 
 [node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.934637, 0)
 
 [node name="Camera3D" type="Camera3D" parent="head"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="head/Camera3D"]
-libraries = {
-&"": SubResource("AnimationLibrary_41b6k")
-}
+[node name="MantleLow" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -3.0598e-08, -1, 0, 0.7, -4.37114e-08, 0, 0.209536, 0)
 
-[node name="Marker3D" type="Marker3D" parent="head/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3741, -0.846646)
-gizmo_extents = 10.0
-
-[node name="peacock" parent="head/Camera3D" instance=ExtResource("2_kpjcp")]
-transform = Transform3D(-1.68864e-07, 6.51592e-08, 0.05, 0.0179998, 0.0466477, -3.74008e-15, -0.0466477, 0.0179998, -1.81e-07, 1.8271, -0.548135, -2.0041)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="head/Camera3D"]
-transform = Transform3D(0.05, 0, 0, 0, -2.18557e-09, -0.05, 0, 0.05, -2.18557e-09, 0, 0, -1.83808)
-mesh = SubResource("TorusMesh_kpjcp")
-
-[node name="egg" type="MeshInstance3D" parent="head/Camera3D"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.41159, -0.0836226, -2.53142)
-mesh = SubResource("SphereMesh_kpjcp")
-surface_material_override/0 = SubResource("StandardMaterial3D_kpjcp")
+[node name="MantleHigh" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -3.0598e-08, -1, 0, 0.7, -4.37114e-08, 0, 1.31449, 0)
